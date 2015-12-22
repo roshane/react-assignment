@@ -1,9 +1,9 @@
 var React = require('react');
-var SearchBox = require('./searchBox')
+var SearchComponent = require('./SearchComponent');
 
 var options={
 	searchPlaceholderText: "Search"
 }
 
-var element = React.createElement(SearchBox, options);
+var element = React.createElement(SearchComponent, options);
 React.render(element, document.getElementById('container'));
