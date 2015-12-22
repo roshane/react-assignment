@@ -3,8 +3,8 @@ var React = require('react');
 module.exports = React.createClass({
 
 	handleSearch:function(event){
-		var searchKeyword=event.target.value.trim();
-		console.info(searchKeyword);
+		var searchKey=event.target.value.trim();
+		this.props.notifySearchKey(searchKey);
 	},
 
 	render: function() {

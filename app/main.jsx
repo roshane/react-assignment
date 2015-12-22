@@ -5,5 +5,6 @@ var options={
 	searchPlaceholderText: "Search"
 }
 
-var element = React.createElement(SearchComponent, options);
-React.render(element, document.getElementById('container'));
+var parentNode=document.getElementById('container');
+var searchComponent = React.createElement(SearchComponent, options);
+React.render(searchComponent, parentNode);

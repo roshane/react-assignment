@@ -2,17 +2,19 @@ var React=require('react');
 
 module.exports=React.createClass({
 
-	getInitialState:function(){
-		return {searchKeyword:''};
-	},
-
-	triggerSearch:function(searchKeyword){
-
-	},
+	// getInitialState:function(){
+	// 	return {'searchKey':''};
+	// },
 
 	render:function(){
+		var searchKey=this.props.searchKey;
+		console.log("Data Table " +searchKey)
 		return(
 			<div>
+			<span className="label label-default">
+			{searchKey!=undefined? ('Result for : '+searchKey) : '...'} 
+			</span>
+			<br/>
 			<table className="table table-striped table-condensed">
 			<thead>
 			<tr>
@@ -44,7 +46,7 @@ module.exports=React.createClass({
 			</tbody>
 			</table>
 			</div>
-		);
+			);
 
 	}
 });
