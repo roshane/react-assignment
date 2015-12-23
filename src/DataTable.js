@@ -3,20 +3,39 @@ import { render } from 'react-dom';
 
 class DataTable extends Component{
 
-    constructor(props){
-    	super(props);
-    	this.state={searchKey:''};
-    }
+	constructor(props){
+		super(props);
+		this.state={searchKey:''};
+	}
 
-    render(){
+	renderCustomers(){
+		
+		var customers=this.props.customers;
+		var customerRows=[];
+		if(customers){
+			customers.map((customer)=>{
+				
+				var row=( <tr>
+				<td>{customer.firstName}</td>
+				<td>{customer.lastName}</td>
+				<td>{customer.Age}</td>
+				</tr>);
+				customerRows.push(row);
+			});
+			return customerRows;
+		}else{
+			return <div className='alert alert-info'>No Data to be displayed :(</div>
+		}
+	}
+
+	render(){
 
 		var searchKey=this.props.searchKey;
-		var customers=this.props.customers;
 
 		return(
 			<div>
 			<span className="label label-default">
-			{searchKey!=undefined? ('Result for : '+searchKey) : '...'} 
+			{(searchKey!=undefined || searchKey=='')? ('Result for : '+searchKey) : '...'} 
 			</span>
 			<br/>
 			<table className="table table-striped table-condensed">
@@ -28,9 +47,7 @@ class DataTable extends Component{
 			</tr>
 			</thead>
 			<tbody>
-			{customers.map(function(customer){
-				return <tr> <td>{customer.firstName}</td> <td>{customer.lastName}</td> <td>{customer.age}</td> </tr>
-			})}
+			{this.renderCustomers()}
 			</tbody>
 			</table>
 			</div>

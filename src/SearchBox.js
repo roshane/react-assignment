@@ -10,7 +10,10 @@ class SearchBox extends Component{
 
 	handleSearch(event){
 		var searchKey=event.target.value.trim();
-		SearchActions.updateSearchkey(searchKey);
+		if(event.key=='Enter'){
+			console.log("searchKey : "+searchKey)
+			SearchActions.searchCustomers(searchKey);
+		}
 	}
 
 	render(){
@@ -18,7 +21,7 @@ class SearchBox extends Component{
 			<div className="input-group">
 			<input type="text" className="form-control" 
 			placeholder={this.props.searchPlaceHolderText} 
-			onChange={this.handleSearch.bind(this)}
+			onKeyPress={this.handleSearch.bind(this)}
 			/>
 			<div className="input-group-addon">
 			<span className="glyphicon glyphicon-search"></span>

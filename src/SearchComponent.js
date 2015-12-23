@@ -10,19 +10,19 @@ class SearchComponent extends Component{
 		super(props);
 		var initialState=CustomerStore.getState();
 		this.state=initialState;
-		console.log(initialState);
 	}
 
 	componentDidMount() {
         CustomerStore.listen((state) => this.onChange(state));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount() {    	
         CustomerStore.unlisten((state) => this.onChange(state));
     }
 
     onChange(state) {
-    	console.info("SearchComponent onChange[] "+state);
+    	console.info("SearchComponent [onChange] ");
+    	console.log(state);
         this.setState(state);
     }
 

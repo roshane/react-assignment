@@ -2,9 +2,8 @@ var alt=require('../alt');
 
 class SearchAction {
 	
-	updateSearchkey(key){
-		console.info("SearchAction : "+key);
-		this.dispatch(key);
+	searchCustomers(key){
+		return ({searchKey:key});
 	}
 }
 
