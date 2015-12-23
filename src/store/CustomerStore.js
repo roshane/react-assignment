@@ -16,6 +16,8 @@ class CustomerStore{
 		this.bindListeners({
 			handleSearchCustomers: SearchActions.searchCustomers
 		});
+		//TODO hack to load data initially
+		setTimeout(this.handleSearchCustomers({'searchKey':''}),400);
 
 	}
 
@@ -29,8 +31,10 @@ class CustomerStore{
 		CustomerService.fetchCustomers(searchKey.searchKey)
 		.then(function(data){
 			data.forEach(c=>{
-				if(c['firstName'].toUpperCase().contains(self.searchCriteria['firstName'].toUpperCase())){
+				if(self.isDefined(self.searchCriteria['firstName']) && c['firstName'].toUpperCase().contains(self.searchCriteria['firstName'].toUpperCase())){
 					console.log('found customer : '+c);
+					filteredCustomerList.push(c);
+				}else if(!self.isDefined(self.searchCriteria['firstName'])){
 					filteredCustomerList.push(c);
 				}
 			})
@@ -42,15 +46,9 @@ class CustomerStore{
 
 	updateSearchCriteria(searchKey){
 		var searchKeys=searchKey.split(",");
-		if(this.isDefined(searchKeys[0])){
-			this.searchCriteria.firstName=searchKeys[0].trim();
-		}
-		if(this.isDefined(searchKeys[1])){
-			this.searchCriteria.lastName=searchKeys[1].trim();
-		}
-		if(this.isDefined(searchKeys[2]) && !isNaN(searchKeys[2])){
-			this.searchCriteria.Age=parseInt(searchKeys[2].trim());
-		}
+		this.searchCriteria.firstName=searchKeys[0].trim();
+		// this.searchCriteria.lastName=searchKeys[1].trim();
+		// this.searchCriteria.Age=parseInt(searchKeys[2].trim());
 		for(var k in this.searchCriteria){
 			if(this.searchCriteria[k]!=null && this.searchCriteria[k]!=undefined){
 				this.isSearchCriteriaDefined=true;
